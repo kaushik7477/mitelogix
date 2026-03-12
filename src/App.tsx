@@ -35,6 +35,11 @@ import {
   X
 } from 'lucide-react';
 import whatsappLogo from './assets/whatsapp_logo.png';
+import image3 from './assets/image3.png';
+import image7 from './assets/image7.png';
+import image8 from './assets/image8.png';
+import image10 from './assets/image10.png';
+import image12 from './assets/image12.png';
 
 // --- Constants ---
 const WHATSAPP_NUMBER = "917477310465/8617791812";
@@ -291,7 +296,7 @@ const Hero = ({ onOpenSchedule }: { onOpenSchedule: () => void }) => {
             <div className="absolute inset-0 bg-accent/20 blur-[100px] rounded-full animate-pulse" />
             {/* Main Hero Image - Reduced size */}
             <img
-              src="..\src\assets\image3.png"
+              src={image3}
               alt="Mitelogix Tech"
               className="w-full h-full object-cover rounded-[40px] border border-white/10 transition-all duration-1000 shadow-2xl"
               referrerPolicy="no-referrer"
@@ -463,28 +468,28 @@ const Portfolio = () => {
         "Farmer Ledger with KG Quantity Tracking",
         "Real-time P&L, Day Book & Reports"
       ],
-      img: "../src/assets/image8.png"
+      img: image8
     },
     {
       title: "INVENTORY SUITE",
       tag: "SAAS PRODUCT",
       desc: "Multi-location inventory management with real-time stock alerts, supplier tracking, and automated reorder.",
       features: ["Real-time Stock Levels", "Barcode & QR Scanning", "Supplier Management"],
-      img: "../src/assets/image7.png"
+      img: image7
     },
     {
       title: "BUSINESS WEBSITES",
       tag: "WEB PLATFORM",
       desc: "Professional, mobile-first websites for local businesses — fast, SEO-optimized, easy to manage.",
       features: ["Responsive & Mobile-First", "SEO Optimized", "Easy Content Management"],
-      img: "../src/assets/image12.png"
+      img: image12
     },
     {
       title: "CUSTOM MOBILE HUB",
       tag: "MOBILE APP",
       desc: "Dedicated internal apps for field teams to track sales and deliveries in real-time.",
       features: ["Offline Sync", "Location Tracking", "Instant Notifications"],
-      img: "../src/assets/image10.png"
+      img: image10
     }
   ];
 
