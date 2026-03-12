@@ -40,6 +40,7 @@ import image7 from './assets/image7.png';
 import image8 from './assets/image8.png';
 import image10 from './assets/image10.png';
 import image12 from './assets/image12.png';
+import image15 from './assets/image15.png';
 
 // --- Constants ---
 const WHATSAPP_NUMBER = "917477310465/8617791812";
@@ -1045,7 +1046,7 @@ const FeaturedCaseStudy = () => {
             <div className="absolute -inset-4 bg-accent/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             <div className="relative aspect-video overflow-hidden rounded-[40px] border border-white/10">
               <img
-                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2026&auto=format&fit=crop"
+                src={image15}
                 alt="FinTech Platform"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                 referrerPolicy="no-referrer"
