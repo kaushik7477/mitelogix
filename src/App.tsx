@@ -56,7 +56,7 @@ const SchedulingModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => 
   const handleSchedule = () => {
     const message = `Hey, I want to book a meeting at ${date} ${time} for Mitelogix. I'm interested in your digital solutions.`;
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
+    window.open(`https://wa.me/7477310465?text=HI`, '_blank');
     onClose();
   };
 
