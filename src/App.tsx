@@ -32,7 +32,10 @@ import {
   Box,
   CheckCircle2,
   Menu,
-  X
+  X,
+  Smartphone,
+  Megaphone,
+  Facebook
 } from 'lucide-react';
 import whatsappLogo from './assets/whatsapp_logo.png';
 import image3 from './assets/image3.png';
@@ -54,9 +57,25 @@ const SchedulingModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => 
   const [time, setTime] = useState("");
 
   const handleSchedule = () => {
-    const message = `Hey, I want to book a meeting at ${date} ${time} for Mitelogix. I'm interested in your digital solutions.`;
+    const formattedDate = date ? new Date(date).toLocaleDateString('en-GB', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }) : date;
+
+    const message = `Hi Mitelogix Team,
+
+I would like to schedule a meeting for a consultation.
+
+ *Meeting Details:*
+- Date: ${formattedDate}
+- Time: ${time} 
+
+I'm interested in your digital solutions. Looking forward to our discussion!`;
+
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/7477310465?text=HI`, '_blank');
+    window.open(`https://wa.me/9475385065?text=${encodedMessage}`, '_blank');
     onClose();
   };
 
@@ -207,7 +226,7 @@ const Navbar = ({ onOpenSchedule }: { onOpenSchedule: () => void }) => {
 
 const Floating3DIcons = () => {
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
       <motion.div
         animate={{
           y: [0, -40, 0],
@@ -215,10 +234,10 @@ const Floating3DIcons = () => {
           rotate: [0, 15, 0]
         }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[15%] left-[10%] opacity-20"
+        className="absolute top-[15%] left-[5%] md:left-[10%] opacity-10 md:opacity-20"
       >
         <div className="w-24 h-24 bg-accent/30 rounded-3xl blur-xl" />
-        <MessageCircle className="w-16 h-16 text-accent absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+        <Smartphone className="w-16 h-16 text-accent absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
       </motion.div>
 
       <motion.div
@@ -228,92 +247,60 @@ const Floating3DIcons = () => {
           rotate: [0, -15, 0]
         }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="absolute top-[60%] right-[10%] opacity-20"
+        className="absolute top-[65%] right-[5%] md:right-[10%] opacity-10 md:opacity-20"
       >
         <div className="w-32 h-32 bg-accent/30 rounded-full blur-2xl" />
-        <Zap className="w-20 h-20 text-accent absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+        <Code2 className="w-20 h-20 text-accent absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
       </motion.div>
 
       <motion.div
         animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.1, 0.3, 0.1]
+          y: [-20, 20, -20],
+          rotate: [0, 20, 0]
         }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[40%] left-[80%] w-40 h-40 bg-accent/10 rounded-full blur-3xl"
-      />
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        className="absolute top-[40%] right-[80%] md:right-[85%] opacity-10 md:opacity-20"
+      >
+        <div className="w-40 h-40 bg-accent/10 rounded-full blur-3xl" />
+        <Megaphone className="w-14 h-14 text-accent absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+      </motion.div>
     </div>
   );
 };
 
 const Hero = ({ onOpenSchedule }: { onOpenSchedule: () => void }) => {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center pt-20 overflow-hidden">
+    <section className="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-20 md:pt-20 overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-20" />
       <Floating3DIcons />
 
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-10">
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="relative mt-12 lg:mt-0 lg:order-2"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-[10px] font-black tracking-[0.2em] mb-8">
-            YOUR VISION, OUR LOGIC
-          </div>
-          <h1 className="text-6xl md:text-9xl font-black leading-[0.85] mb-8 tracking-tighter uppercase">
-            WE BUILD <br />
-            <span className="text-accent purple-glow">DIGITAL</span> <br />
-            <span className="text-white">SOLUTION</span>
-          </h1>
-          <p className="text-lg md:text-xl text-white/60 mb-10 max-w-lg leading-relaxed font-medium">
-            Custom software that transforms how Indian businesses operate. From Vertical SaaS ERP to mobile apps — we turn complex problems into elegant solutions.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <button
-              onClick={onOpenSchedule}
-              className="px-10 py-5 bg-accent text-white font-black uppercase tracking-[0.1em] rounded-2xl hover:scale-105 transition-all purple-glow-box flex items-center gap-3"
-            >
-              <Calendar className="w-6 h-6" />
-              Schedule a meeting
-            </button>
-            <a
-              href="#work"
-              className="px-10 py-5 bg-white/5 border border-white/10 text-white font-black uppercase tracking-[0.1em] rounded-2xl hover:bg-white/10 transition-all flex items-center gap-3"
-            >
-              View Work
-              <ArrowUpRight className="w-6 h-6" />
-            </a>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ duration: 1 }}
-          className="relative"
-        >
-          <div className="relative w-full max-w-sm aspect-[4/5] mx-auto">
-            <div className="absolute inset-0 bg-accent/20 blur-[100px] rounded-full animate-pulse" />
-            {/* Main Hero Image - Reduced size */}
+          <div className="relative w-full max-w-md aspect-[4/5] mx-auto">
+            <div className="absolute inset-0 bg-accent/20 blur-[120px] rounded-full animate-pulse" />
             <img
               src={image3}
               alt="Mitelogix Tech"
-              className="w-full h-full object-cover rounded-[40px] border border-white/10 transition-all duration-1000 shadow-2xl"
+              className="w-full h-full object-cover rounded-[40px] border border-white/10 shadow-2xl relative z-10"
               referrerPolicy="no-referrer"
             />
 
-            {/* Floating Elements on Image */}
+            {/* Floating Elements - Always visible now */}
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity }}
-              className="absolute -top-6 -left-12 p-4 bg-zinc-900/80 backdrop-blur-xl border border-white/10 rounded-2xl purple-glow-box hidden md:block"
+              className="absolute -top-6 -left-6 md:-left-12 p-3 md:p-4 bg-zinc-900/80 backdrop-blur-xl border border-white/10 rounded-2xl purple-glow-box z-20 scale-75 sm:scale-100 origin-bottom-right"
             >
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-accent/20 rounded-lg text-accent"><Rocket className="w-5 h-5" /></div>
                 <div>
-                  <div className="text-[8px] font-black text-white/40 uppercase tracking-widest">Performance</div>
-                  <div className="text-xs font-bold">99.9% UPTIME</div>
+                  <div className="text-[10px] font-black text-white/40 uppercase tracking-widest">Performance</div>
+                  <div className="text-sm font-bold whitespace-nowrap">99.9% UPTIME</div>
                 </div>
               </div>
             </motion.div>
@@ -321,16 +308,51 @@ const Hero = ({ onOpenSchedule }: { onOpenSchedule: () => void }) => {
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 4, repeat: Infinity, delay: 1 }}
-              className="absolute bottom-4 right-4 md:-bottom-6 md:-right-12 p-4 bg-zinc-900/80 backdrop-blur-xl border border-white/10 rounded-2xl purple-glow-box"
+              className="absolute -bottom-6 -right-6 md:-right-12 p-3 md:p-4 bg-zinc-900/80 backdrop-blur-xl border border-white/10 rounded-2xl purple-glow-box z-20 scale-75 sm:scale-100 origin-top-left"
             >
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-accent/20 rounded-lg text-accent"><ShieldCheck className="w-5 h-5" /></div>
                 <div>
-                  <div className="text-[8px] font-black text-white/40 uppercase tracking-widest">Security</div>
-                  <div className="text-xs font-bold">END-TO-END ENCRYPTION</div>
+                  <div className="text-[10px] font-black text-white/40 uppercase tracking-widest">Security</div>
+                  <div className="text-sm font-bold whitespace-nowrap">ENCRYPTED</div>
                 </div>
               </div>
             </motion.div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center lg:text-left lg:order-1"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-[10px] font-black tracking-[0.25em] mb-8 uppercase">
+            Your Vision, Our Logic
+          </div>
+          <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black leading-[1.1] md:leading-[0.85] mb-8 tracking-tighter uppercase">
+            We Build <br className="hidden sm:block" />
+            <span className="text-accent purple-glow">Digital</span> <br className="hidden sm:block" />
+            <span className="text-white">Solution</span>
+          </h1>
+          <p className="text-base md:text-xl text-white/60 mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed font-medium">
+            Custom software that transforms how Indian businesses operate. From Vertical SaaS ERP to mobile apps — we turn complex problems into elegant solutions.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+            <button
+              onClick={onOpenSchedule}
+              className="w-full sm:w-auto px-8 py-4 md:px-10 md:py-5 bg-accent text-white font-black uppercase tracking-[0.1em] rounded-2xl hover:scale-105 transition-all purple-glow-box flex items-center justify-center gap-3"
+            >
+              <Calendar className="w-5 h-5 md:w-6 md:h-6" />
+              Schedule a meeting
+            </button>
+            <a
+              href="#work"
+              className="w-full sm:w-auto px-8 py-4 md:px-10 md:py-5 bg-white/5 border border-white/10 text-white font-black uppercase tracking-[0.1em] rounded-2xl hover:bg-white/10 transition-all flex items-center justify-center gap-3"
+            >
+              View Work
+              <ArrowUpRight className="w-5 h-5 md:w-6 md:h-6" />
+            </a>
           </div>
         </motion.div>
       </div>
@@ -412,43 +434,88 @@ const Services = () => {
 };
 
 const TechArsenal = () => {
-  const row1 = ["JavaScript", "TypeScript", "Python", "PHP", "React.js", "Next.js", "VITE.JS", "Tailwind CSS", "HTML", "CSS"];
-  const row2 = ["Node.js", "NestJS", "Django", "FastAPI", "MongoDB", "MySQL", "Firebase", "Kotlin", "Java", "Dart"];
+  const row1 = [
+    { name: "JavaScript", slug: "javascript" },
+    { name: "TypeScript", slug: "typescript" },
+    { name: "Python", slug: "python" },
+    { name: "PHP", slug: "php" },
+    { name: "React.js", slug: "react" },
+    { name: "Next.js", slug: "nextdotjs" },
+    { name: "Vite", slug: "vite" },
+    { name: "Tailwind CSS", slug: "tailwindcss" },
+    { name: "HTML5", slug: "html5" },
+    { name: "CSS", slug: "css" },
+  ];
+  const row2 = [
+    { name: "Node.js", slug: "nodedotjs" },
+    { name: "NestJS", slug: "nestjs" },
+    { name: "Django", slug: "django" },
+    { name: "FastAPI", slug: "fastapi" },
+    { name: "MongoDB", slug: "mongodb" },
+    { name: "MySQL", slug: "mysql" },
+    { name: "Firebase", slug: "firebase" },
+    { name: "Kotlin", slug: "kotlin" },
+    { name: "Java", slug: "nodedotjs" },
+    { name: "Dart", slug: "dart" },
+  ];
 
-  const getTechIcon = (name: string) => {
-    const iconProps = { className: "w-8 h-8 text-accent mb-2 group-hover:scale-110 transition-transform" };
-    if (name.includes("React") || name.includes("Next") || name.includes("VITE")) return <Zap {...iconProps} />;
-    if (name.includes("Node") || name.includes("Nest") || name.includes("Django") || name.includes("FastAPI")) return <Cpu {...iconProps} />;
-    if (name.includes("Mongo") || name.includes("MySQL") || name.includes("Firebase")) return <Database {...iconProps} />;
-    if (name.includes("Tailwind") || name.includes("HTML") || name.includes("CSS") || name.includes("Globe")) return <Globe {...iconProps} />;
-    return <Code2 {...iconProps} />;
-  };
-
-  return (
-    <section className="py-32 bg-zinc-950 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 mb-16">
-        <h2 className="text-4xl font-black uppercase tracking-widest text-center">Our Technical <span className="text-accent">Arsenal</span></h2>
+  const TechCard = ({ tech }: { tech: { name: string, slug: string } }) => (
+    <div className="group relative flex flex-col items-center justify-center min-w-[160px] px-8 py-10 bg-white/[0.02] backdrop-blur-md border border-white/[0.05] rounded-[2.5rem] hover:border-accent/30 transition-all duration-700 cursor-default hover:-translate-y-3 mx-5">
+      {/* Background Glow */}
+      <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[2.5rem]" />
+      
+      {/* Icon Container */}
+      <div className="relative mb-6">
+        <div className="absolute inset-0 bg-accent/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 scale-150" />
+        <img
+          src={`https://cdn.simpleicons.org/${tech.slug}/white`}
+          alt={tech.name}
+          className="w-12 h-12 relative z-10 transition-all duration-700 group-hover:scale-110 group-hover:opacity-0"
+        />
+        <img
+          src={`https://cdn.simpleicons.org/${tech.slug}`}
+          alt={tech.name}
+          className="w-12 h-12 absolute inset-0 z-20 transition-all duration-700 scale-50 opacity-0 group-hover:scale-110 group-hover:opacity-100"
+        />
       </div>
 
-      <div className="space-y-12">
-        <div className="flex gap-8 animate-scroll-left whitespace-nowrap">
+      <span className="relative z-10 text-[10px] font-black uppercase tracking-[0.25em] text-white/30 group-hover:text-white transition-all duration-700">
+        {tech.name}
+      </span>
+
+      {/* Bottom accent line */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-accent rounded-full transition-all duration-700 group-hover:w-8" />
+    </div>
+  );
+
+  return (
+    <section className="py-32 bg-black overflow-hidden relative">
+      {/* Ambient Background Light */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-accent/5 blur-[120px] rounded-full" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-accent/5 blur-[120px] rounded-full" />
+      
+      <div className="max-w-7xl mx-auto px-6 mb-24 relative z-10">
+        <div className="flex flex-col items-center text-center space-y-4">
+          <div className="flex items-center gap-3 px-4 py-1.5 bg-accent/10 border border-accent/20 rounded-full">
+            <div className="w-1.5 h-1.5 bg-accent rounded-full animate-pulse" />
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent">Technical Arsenal</span>
+          </div>
+          <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-tight">
+            Building with <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-b from-accent to-accent/40">Cutting-Edge</span> Tech
+          </h2>
+        </div>
+      </div>
+
+      <div className="space-y-10 relative z-10">
+        <div className="flex animate-scroll-left whitespace-nowrap py-4">
           {[...row1, ...row1].map((tech, i) => (
-            <div key={i} className="group flex flex-col items-center justify-center min-w-[160px] px-8 py-6 bg-transparent border border-accent/40 rounded-2xl hover:border-accent transition-all cursor-default">
-              {getTechIcon(tech)}
-              <span className="text-[10px] font-black uppercase tracking-widest text-white/60 group-hover:text-white transition-colors">
-                {tech}
-              </span>
-            </div>
+            <TechCard key={i} tech={tech} />
           ))}
         </div>
-        <div className="flex gap-8 animate-scroll-right whitespace-nowrap">
+        <div className="flex animate-scroll-right whitespace-nowrap py-4">
           {[...row2, ...row2].map((tech, i) => (
-            <div key={i} className="group flex flex-col items-center justify-center min-w-[160px] px-8 py-6 bg-transparent border border-accent/40 rounded-2xl hover:border-accent transition-all cursor-default">
-              {getTechIcon(tech)}
-              <span className="text-[10px] font-black uppercase tracking-widest text-white/60 group-hover:text-white transition-colors">
-                {tech}
-              </span>
-            </div>
+            <TechCard key={i} tech={tech} />
           ))}
         </div>
       </div>
@@ -532,33 +599,100 @@ const Portfolio = () => {
 
 const Process = () => {
   const steps = [
-    { title: "Discovery Call", desc: "Understanding your pain points and business goals." },
-    { title: "Proposal & Plan", desc: "Detailed roadmap with tech stack and timelines." },
-    { title: "Build & Review", desc: "Agile development with regular demos and feedback." },
-    { title: "Launch & Support", desc: "Seamless deployment and ongoing maintenance." }
+    { 
+      title: "Discovery Call", 
+      desc: "Understanding your pain points and business goals.",
+      icon: <Phone className="w-6 h-6" />,
+      color: "from-blue-500 to-cyan-500"
+    },
+    { 
+      title: "Proposal & Plan", 
+      desc: "Detailed roadmap with tech stack and timelines.",
+      icon: <Rocket className="w-6 h-6" />,
+      color: "from-purple-500 to-pink-500"
+    },
+    { 
+      title: "Build & Review", 
+      desc: "Agile development with regular demos and feedback.",
+      icon: <Code2 className="w-6 h-6" />,
+      color: "from-orange-500 to-red-500"
+    },
+    { 
+      title: "Launch & Support", 
+      desc: "Seamless deployment and ongoing maintenance.",
+      icon: <ShieldCheck className="w-6 h-6" />,
+      color: "from-green-500 to-emerald-500"
+    }
   ];
 
   return (
-    <section className="py-32 bg-accent/5">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-20">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-12 h-px bg-accent" />
-            <span className="text-xs font-black uppercase tracking-[0.3em] text-white/40">How We Work</span>
-          </div>
-          <h2 className="text-5xl font-black uppercase tracking-tighter">OUR <span className="text-accent">PROCESS</span></h2>
-        </div>
+    <section id="process" className="py-32 bg-black relative overflow-hidden">
+      {/* Background Decorative Elements */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/5 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
 
-        <div className="grid md:grid-cols-4 gap-8">
-          {steps.map((s, i) => (
-            <div key={i} className="relative">
-              {i < steps.length - 1 && <div className="hidden md:block absolute top-8 left-full w-full h-px bg-white/5 -translate-x-1/2" />}
-              <div className="w-16 h-16 bg-zinc-900 border border-white/10 rounded-2xl flex items-center justify-center text-2xl font-black text-accent mb-8 relative z-10">
-                {i + 1}
-              </div>
-              <h4 className="text-lg font-black mb-3 uppercase tracking-tight">{s.title}</h4>
-              <p className="text-sm text-white/40 leading-relaxed">{s.desc}</p>
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-24 text-center"
+        >
+          <div className="flex flex-col items-center gap-4 mb-6">
+            <div className="flex items-center gap-3 px-4 py-1.5 bg-accent/10 border border-accent/20 rounded-full">
+              <div className="w-1.5 h-1.5 bg-accent rounded-full animate-pulse" />
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent">How We Work</span>
             </div>
+          </div>
+          <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter">
+            Our <span className="text-transparent bg-clip-text bg-gradient-to-b from-accent to-accent/40">Process</span>
+          </h2>
+          <p className="mt-6 text-white/40 max-w-xl mx-auto text-lg">From initial spark to final launch, we follow a rigorous process to ensure your success.</p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-4 gap-8 relative">
+          {/* Connecting Line (Desktop) */}
+          <div className="hidden md:block absolute top-12 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+          
+          {steps.map((s, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="group relative"
+            >
+              <div className="relative z-10 flex flex-col items-center text-center">
+                {/* Step Number & Icon */}
+                <div className="mb-8 relative">
+                  <motion.div 
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className={`w-24 h-24 rounded-3xl bg-zinc-900 border border-white/10 flex flex-col items-center justify-center gap-1 transition-all duration-500 group-hover:border-accent/50 group-hover:purple-glow-box relative overflow-hidden`}
+                  >
+                    <div className={`absolute inset-0 bg-gradient-to-br ${s.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+                    <span className="text-xs font-black text-white/20 group-hover:text-accent transition-colors">0{i + 1}</span>
+                    <div className="text-accent group-hover:scale-110 transition-transform duration-500">
+                      {s.icon}
+                    </div>
+                  </motion.div>
+                  
+                  {/* Pulse Effect */}
+                  <div className="absolute -inset-4 bg-accent/5 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+                </div>
+
+                {/* Content */}
+                <h4 className="text-xl font-black mb-4 uppercase tracking-tight group-hover:text-accent transition-colors">{s.title}</h4>
+                <p className="text-sm text-white/40 leading-relaxed group-hover:text-white/60 transition-colors px-4">{s.desc}</p>
+                
+                {/* Decorative element on hover */}
+                <motion.div 
+                  initial={{ width: 0 }}
+                  whileHover={{ width: "40px" }}
+                  className="h-1 bg-accent rounded-full mt-6 transition-all duration-500"
+                />
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -569,18 +703,20 @@ const Process = () => {
 const Founders = () => {
   const founders = [
     {
-      name: "KOUSHIK HALDER",
+      name: "KAUSHIK HALDER",
       role: "FOUNDER & LEAD DEVELOPER",
       desc: "Full-stack developer with deep expertise in ERP systems, business logic, and scalable architecture. Passionate about solving real operational problems through clean code.",
       phone: "+91 74773 10465",
-      initials: "KH"
+      initials: "KH",
+      image: "" // Add path to Kaushik's photo here (e.g., import kaushik from './assets/kaushik.png')
     },
     {
       name: "ARKO SARKAR",
       role: "CO-FOUNDER & TECH LEAD",
       desc: "full stack developer turning ideas into scalable products,building saas solutions for indian SMEs with focus with focus on real time system and automation.specializes in problem solving",
       phone: "+91 86177 91812",
-      initials: "AS"
+      initials: "AS",
+      image: "" // Add path to Arko's photo here (e.g., import arko from './assets/arko.png')
     }
   ];
 
@@ -592,16 +728,22 @@ const Founders = () => {
             <div className="w-12 h-px bg-accent" />
             <span className="text-xs font-black uppercase tracking-[0.3em] text-white/40">The Team</span>
           </div>
-          <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter">MEET THE <span className="text-accent">FOUNDERS</span></h2>
+          <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter">THE <span className="text-accent">SOUL </span>OF THE BRAND</h2>
           <p className="mt-6 text-white/40 max-w-xl text-lg">Two engineers from Barasat — building practical software for real Indian businesses.</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
           {founders.map((f, i) => (
-            <div key={i} className="p-12 rounded-[40px] bg-zinc-900 border border-white/5 hover:border-accent/30 transition-all">
+            <div key={i} className="p-12 rounded-[40px] bg-zinc-900 border border-white/5 hover:border-accent/30 transition-all group">
               <div className="flex items-center gap-6 mb-10">
-                <div className="w-24 h-24 bg-gradient-to-br from-accent to-purple-900 rounded-full flex items-center justify-center text-3xl font-black text-white purple-glow-box">
-                  {f.initials}
+                <div className="w-24 h-24 bg-gradient-to-br from-accent to-purple-900 rounded-full flex items-center justify-center text-3xl font-black text-white purple-glow-box overflow-hidden relative">
+                  {f.image ? (
+                    <img src={f.image} alt={f.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                  ) : (
+                    f.initials
+                  )}
+                  {/* Decorative overlay */}
+                  <div className="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                 </div>
                 <div>
                   <h3 className="text-2xl font-black tracking-tight">{f.name}</h3>
@@ -660,8 +802,8 @@ const Footer = () => {
                   <Phone className="w-6 h-6 text-accent group-hover:scale-110 transition-transform" />
                   <span className="font-bold">+91 74773 10465</span>
                 </a>
-                <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" className="flex items-center gap-3 px-6 py-4 bg-accent/10 rounded-2xl border border-accent/20 hover:bg-accent transition-all group">
-                  <MessageCircle className="w-6 h-6 text-accent group-hover:text-white group-hover:scale-110 transition-transform" />
+                <a href={`https://wa.me/9475385065`} target="_blank" className="flex items-center gap-3 px-6 py-4 bg-accent/10 rounded-2xl border border-accent/20 hover:bg-accent transition-all group">
+                  <img src={whatsappLogo} alt="WhatsApp" className="w-10 h-10 object-contain group-hover:scale-110 transition-transform" />
                   <span className="font-bold">WhatsApp Us</span>
                 </a>
               </div>
@@ -759,25 +901,78 @@ const WhoWeAre = () => {
             The Light That <span className="text-accent italic">Guides You</span> to The Summit
           </p>
         </motion.div>
+      </div>
 
-        {/* Floating 3D Icons (Simulated) */}
+      {/* Floating 3D Icons (Background) */}
+      <div className="absolute inset-0 pointer-events-none z-0">
         <motion.div
-          animate={{ y: [0, -20, 0], rotate: [0, 10, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-12 md:top-20 left-10 md:left-40"
+          animate={{ 
+            y: [0, -30, 0], 
+            rotate: [0, 15, 0],
+            scale: [1, 1.1, 1] 
+          }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[10%] left-[5%] md:left-[10%] opacity-30 md:opacity-50"
         >
-          <div className="p-4 bg-accent/20 backdrop-blur-xl border border-accent/30 rounded-2xl purple-glow-box">
-            <MessageCircle className="w-10 h-10 text-accent" />
+          <div className="p-5 bg-accent/10 backdrop-blur-2xl border border-accent/20 rounded-[2rem] purple-glow-box">
+            <Smartphone className="w-12 h-12 md:w-16 md:h-16 text-accent" />
           </div>
         </motion.div>
 
         <motion.div
-          animate={{ y: [0, 20, 0], rotate: [0, -10, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute bottom-4 md:bottom-20 right-4 md:right-40"
+          animate={{ 
+            y: [0, 30, 0], 
+            rotate: [0, -15, 0],
+            scale: [1, 1.05, 1] 
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute top-[45%] right-[2%] md:right-[8%] opacity-30 md:opacity-50"
         >
-          <div className="p-4 bg-accent/20 backdrop-blur-xl border border-accent/30 rounded-2xl purple-glow-box">
-            <Zap className="w-10 h-10 text-accent" />
+          <div className="p-5 bg-accent/10 backdrop-blur-2xl border border-accent/20 rounded-[2rem] purple-glow-box">
+            <Code2 className="w-12 h-12 md:w-16 md:h-16 text-accent" />
+          </div>
+        </motion.div>
+
+        <motion.div
+          animate={{ 
+            x: [0, 20, 0],
+            y: [0, -20, 0],
+            rotate: [0, 20, 0] 
+          }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute bottom-[8%] left-[5%] md:left-[12%] opacity-30 md:opacity-50"
+        >
+          <div className="p-5 bg-accent/10 backdrop-blur-2xl border border-accent/20 rounded-[2rem] purple-glow-box">
+            <Megaphone className="w-10 h-10 md:w-14 md:h-14 text-accent" />
+          </div>
+        </motion.div>
+
+        {/* New Full Color Thunder Boxes */}
+        <motion.div
+          animate={{ 
+            y: [0, -40, 0],
+            rotate: [12, 32, 12],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          className="absolute top-[15%] right-[10%] md:right-[20%] z-0"
+        >
+          <div className="w-12 h-12 md:w-16 md:h-16 bg-accent rounded-2xl flex items-center justify-center purple-glow-box shadow-[0_0_30px_rgba(159,41,255,0.4)]">
+            <Rocket className="text-white w-6 h-6 md:w-8 md:h-8" />
+          </div>
+        </motion.div>
+
+        <motion.div
+          animate={{ 
+            y: [0, 40, 0],
+            rotate: [-12, -32, -12],
+            scale: [1, 1.05, 1]
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+          className="absolute bottom-[12%] right-[10%] md:right-[20%] z-0"
+        >
+          <div className="w-12 h-12 md:w-16 md:h-16 bg-accent rounded-2xl flex items-center justify-center purple-glow-box shadow-[0_0_30px_rgba(159,41,255,0.4)]">
+            <ShieldCheck className="text-white w-6 h-6 md:w-8 md:h-8" />
           </div>
         </motion.div>
       </div>
@@ -1339,23 +1534,31 @@ const Pricing = () => {
       price: "Plan",
       desc: "Perfect for small local businesses looking to establish a digital presence.",
       features: ["Responsive Website", "Access From Anywhere", "WhatsApp Integration", "1 Month Free Support"],
-      accent: false
+      accent: false,
+      message: "Hi Mitelogix, I'm interested in the Starter Plan for my business. I'd like to get a quote and learn more about the responsive website and support options."
     },
     {
       name: "Business",
       price: "Plan",
       desc: "Comprehensive solutions for growing enterprises needing custom workflows.",
       features: ["Custom Admin Panel", "SaaS Platform", "Advanced Analytics", "Priority Support"],
-      accent: true
+      accent: true,
+      message: "Hi Mitelogix, I'm interested in the Business Plan. Our enterprise is growing, and we need custom workflows, an admin panel, and advanced analytics. Can we discuss a quote?"
     },
     {
       name: "Enterprise",
       price: "Plan",
       desc: "Full-scale digital transformation for large organizations with complex needs.",
       features: ["Multi-platform Suite", "Dedicated Architect", "Cloud Infrastructure", "24/7 AMC Support"],
-      accent: false
+      accent: false,
+      message: "Hi Mitelogix, I'm interested in the Enterprise Plan for a full-scale digital transformation. We need a multi-platform suite and dedicated support. Please provide a quote and let's schedule a consultation."
     }
   ];
+
+  const handleQuote = (message: string) => {
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/9475385065?text=${encodedMessage}`, '_blank');
+  };
 
   return (
     <section id="pricing" className="py-32 relative">
@@ -1391,7 +1594,10 @@ const Pricing = () => {
                   </li>
                 ))}
               </ul>
-              <button className={`w-full py-4 rounded-xl font-black uppercase tracking-widest transition-all ${plan.accent ? 'bg-accent text-white hover:scale-105' : 'bg-white/5 text-white hover:bg-white/10'}`}>
+              <button
+                onClick={() => handleQuote(plan.message)}
+                className={`w-full py-4 rounded-xl font-black uppercase tracking-widest transition-all ${plan.accent ? 'bg-accent text-white hover:scale-105' : 'bg-white/5 text-white hover:bg-white/10'}`}
+              >
                 Get a Quote
               </button>
             </motion.div>
@@ -1559,10 +1765,12 @@ export default function App() {
         @media (max-width: 1024px) {
           .animate-scroll-left { animation-duration: 10s; }
           .animate-scroll-right { animation-duration: 10s; }
+          .animate-infinite-scroll { animation-duration: 15s; }
         }
         @media (max-width: 640px) {
           .animate-scroll-left { animation-duration: 10s; }
           .animate-scroll-right { animation-duration: 10s; }
+          .animate-infinite-scroll { animation-duration: 12s; }
         }
 
         /* Hide default cursor globally */
