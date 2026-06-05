@@ -44,9 +44,12 @@ import image8 from './assets/image8.png';
 import image10 from './assets/image10.png';
 import image12 from './assets/image12.png';
 import image14 from './assets/image14.png';
+import office1 from './assets/office1.jpeg';
+import office2 from './assets/office2.jpeg';
+import office3 from './assets/office3.jpeg';
 
 // --- Constants ---
-const WHATSAPP_NUMBER = "917477310465/8617791812";
+const WHATSAPP_NUMBER = "917477310465";
 const EMAIL = "mitelogix@gmail.com";
 
 // --- Components ---
@@ -1610,9 +1613,9 @@ const Pricing = () => {
 
 const Culture = () => {
   const images = [
-    "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2070&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=2074&auto=format&fit=crop",
+    office1,
+    office2,
+    office3,
     "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2070&auto=format&fit=crop"
   ];
 
